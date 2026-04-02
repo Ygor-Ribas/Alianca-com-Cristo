@@ -11,21 +11,22 @@ html{
 body{
     font-family: Georgia, 'Times New Roman', Times, serif;
     background-image: url(imagend/fundoAlianca.png);
-    color: #fff;
-}
-
-
-.home{
-    min-height: 100vh;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #fff;
+    overflow-x: hidden;
+}
+
+.home{
+    min-height: 100vh;
+    min-height: 100dvh;
     position: relative;
     display: flex;
     flex-direction: column;
     padding: 20px 30px 40px;
 }
-
 
 header{
     width: 100%;
@@ -49,7 +50,7 @@ nav{
 nav a{
     text-decoration: none;
     color: #d4af37;
-    font-size: 1.15rem;
+    font-size: clamp(0.9rem, 1.5vw, 1.15rem);
     font-weight: bold;
     transition: 0.3s;
 }
@@ -62,11 +63,10 @@ nav a:hover{
 .btn-menu{
     background: linear-gradient(180deg, #f0cf68, #d4af37);
     color: #111;
-    padding: 14px 28px;
+    padding: 12px 24px;
     border-radius: 999px;
     box-shadow: 0 0 18px rgba(212, 175, 55, 0.20);
 }
-
 
 .home-conteudo{
     flex: 1;
@@ -83,16 +83,16 @@ nav a:hover{
 }
 
 .home-conteudo img{
-    width: 320px;
+    width: clamp(160px, 28vw, 320px);
     max-width: 85%;
     height: auto;
     display: block;
-    margin-bottom: -100px;
+    margin-bottom: -70px;
     filter: drop-shadow(0 0 18px rgba(212, 175, 55, 0.25));
 }
 
 .home-conteudo h1{
-    font-size: clamp(2.5rem, 7vw, 5.6rem);
+    font-size: clamp(2.2rem, 7vw, 5.6rem);
     color: #d4af37;
     margin-bottom: 18px;
     line-height: 1.1;
@@ -105,6 +105,7 @@ nav a:hover{
     max-width: 900px;
     margin-bottom: 34px;
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.85);
+    padding: 0 10px;
 }
 
 .btn-home{
@@ -112,9 +113,9 @@ nav a:hover{
     display: inline-block;
     background: linear-gradient(180deg, #f0cf68, #d4af37);
     color: #111;
-    font-size: 1.3rem;
+    font-size: clamp(1rem, 2vw, 1.3rem);
     font-weight: bold;
-    padding: 16px 40px;
+    padding: 14px 34px;
     border-radius: 999px;
     transition: 0.3s;
     box-shadow: 0 0 20px rgba(212, 175, 55, 0.22);
@@ -124,69 +125,55 @@ nav a:hover{
     transform: translateY(-3px) scale(1.03);
 }
 
-/* TELAS GRANDES */
-@media (min-width: 1400px){
-    .home{
-        padding-left: 50px;
-        padding-right: 50px;
-    }
-
-    .home-conteudo img{
-        width: 360px;
-    }
-
-    nav{
-        gap: 48px;
-    }
+.sobre{
+    padding: 80px 20px;
+    text-align: center;
 }
 
-
-@media (max-width: 992px){
-    .home{
-        padding: 20px 24px 35px;
-    }
-
-    nav{
-        gap: 26px;
-    }
-
-    nav a{
-        font-size: 1rem;
-    }
-
-    .btn-menu{
-        padding: 12px 22px;
-    }
-
-    .home-conteudo{
-        padding-top: 50px;
-    }
-
-    .home-conteudo img{
-        width: 270px;
-    }
-
-    .btn-home{
-        font-size: 1.15rem;
-        padding: 14px 32px;
-    }
+.titulo-sobre{
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    color: #d4af37;
+    margin-bottom: 40px;
+    text-shadow: 0 3px 10px rgba(0,0,0,0.8);
 }
 
+.sobre-box{
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    background: rgba(0, 0, 0, 0.65);
+    padding: clamp(16px, 3vw, 30px);
+    border: 1px solid #d4af37;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+}
+
+.sobre-box img{
+    width: 100%;
+    max-width: 520px;
+    height: clamp(180px, 32vw, 260px);
+    object-fit: cover;
+    display: block;
+    margin: 0 auto 24px;
+    border-radius: 8px;
+}
+
+.sobre-box p{
+    font-size: clamp(0.95rem, 1.8vw, 1.2rem);
+    line-height: 1.7;
+    color: #eee;
+    max-width: 760px;
+    margin: 0 auto;
+}
 
 @media (max-width: 768px){
     .home{
-        min-height: 100dvh;
         padding: 16px 18px 30px;
-        background-position: center;
     }
 
     nav{
         gap: 16px;
         padding-bottom: 14px;
-    }
-
-    nav a{
-        font-size: 0.98rem;
     }
 
     .btn-menu{
@@ -198,21 +185,13 @@ nav a:hover{
     }
 
     .home-conteudo img{
-        width: 220px;
-        margin-bottom: 22px;
+        margin-bottom: 20px;
     }
 
-    .home-conteudo p{
-        max-width: 95%;
-        margin-bottom: 28px;
-    }
-
-    .btn-home{
-        font-size: 1.05rem;
-        padding: 13px 28px;
+    .sobre{
+        padding: 60px 16px;
     }
 }
-
 
 @media (max-width: 480px){
     .home{
@@ -221,10 +200,6 @@ nav a:hover{
 
     nav{
         gap: 12px;
-    }
-
-    nav a{
-        font-size: 0.92rem;
     }
 
     .btn-menu{
@@ -236,21 +211,7 @@ nav a:hover{
         padding-top: 28px;
     }
 
-    .home-conteudo img{
-        width: 180px;
-    }
-
-    .home-conteudo h1{
-        margin-bottom: 14px;
-    }
-
-    .home-conteudo p{
-        font-size: 1rem;
-        line-height: 1.5;
-    }
-
-    .btn-home{
-        font-size: 1rem;
-        padding: 12px 24px;
+    .sobre{
+        padding: 50px 14px;
     }
 }
