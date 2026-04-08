@@ -302,6 +302,10 @@ nav a:hover {
   font-size: 0.9rem;
 }
 
+.footer-social img{
+  width: 40px;
+}
+
 .endereco{
   color: #d4af37;
   font-size: 1.2rem;
