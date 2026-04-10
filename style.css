@@ -327,6 +327,67 @@ nav a:hover {
   color: #888;
 }
 
+.titulo-coordenadores {
+  text-align: center;
+  color: #d4af37;
+  margin-bottom: 40px;
+  font-size: 2.5rem;
+}
+
+.coordenadores-container {
+  max-width: 1100px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+  padding: 0 10px; 
+}
+
+.card-coordenador {
+  background: rgba(0, 0, 0, 0.7); 
+  padding: 20px;
+  border-radius: 15px;
+  text-align: center;
+  transition: 0.3s;
+  border: 1px solid #d4af37; 
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+}
+
+.card-coordenador:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
+}
+
+.card-coordenador .img-box {
+  width: 100%;
+  margin-bottom: 15px;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.card-coordenador img {
+  width: 100%;
+  height: 350px; 
+  object-fit: cover;
+  display: block;
+}
+
+.card-coordenador h4 {
+  color: #d4af37;
+  margin: 15px 0 10px;
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+.card-coordenador p {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #ddd;
+}
+
+
 @media (max-width: 1024px) {
   .home {
     padding: 20px 20px 36px;
@@ -342,6 +403,10 @@ nav a:hover {
 
   .eventos-box {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .coordenadores-container {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -411,6 +476,14 @@ nav a:hover {
 
   .card-evento img {
     height: 240px;
+  }
+
+  .coordenadores-container {
+    grid-template-columns: 1fr;
+  }
+
+  .titulo-coordenadores {
+    font-size: 2rem;
   }
 }
 
@@ -500,6 +573,18 @@ nav a:hover {
     width: 100%;
     text-align: center;
   }
+
+  .card-coordenador img {
+    height: 180px;
+  }
+
+  .card-coordenador h4 {
+    font-size: 1rem;
+  }
+
+  .card-coordenador p {
+    font-size: 0.85rem;
+  }
 }
 
 @media (min-width: 1400px) {
@@ -521,4 +606,31 @@ nav a:hover {
   .footer-center img {
     width: 70px;
   }
+
+  
+@media (max-width: 768px) {
+  .coordenadores-container {
+    grid-template-columns: 1fr; 
+    max-width: 450px; 
+  }
+
+  .card-coordenador img {
+    height: 400px; 
+  }
+}
+
+
+@media (max-width: 480px) {
+  .card-coordenador img {
+    height: 300px; 
+  }
+  
+  .card-coordenador h4 {
+    font-size: 1.2rem;
+  }
+
+  .card-coordenador p {
+    font-size: 0.9rem;
+  }
+}
 }
