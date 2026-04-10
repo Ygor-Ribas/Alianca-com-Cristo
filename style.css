@@ -327,6 +327,12 @@ nav a:hover {
   color: #888;
 }
 
+.coordenadores {
+  width: 100%;
+  padding: 80px 20px;
+  margin-bottom: 60px;
+}
+
 .titulo-coordenadores {
   text-align: center;
   color: #d4af37;
