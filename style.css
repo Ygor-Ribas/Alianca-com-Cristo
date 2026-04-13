@@ -32,16 +32,19 @@ main {
 }
 
 header {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-  position: relative;
-  z-index: 10;
+  margin: 0;
+  background-color: #1a1a1a;
 }
 
 nav {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 12px 0 18px;
+  padding:  25px;
   display: flex;
   justify-content: center;
   align-items: center;
