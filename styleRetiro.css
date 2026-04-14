@@ -1,0 +1,147 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: clamp(14px, 1vw, 18px);
+}
+
+body {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  background-image: url(imagend/fundogrupo.webp);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: #fff;
+  overflow-x: hidden;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #1a1a1a;
+  z-index: 1000;
+}
+
+.nav {
+  max-width: 1400px;
+  margin: auto;
+  padding: clamp(6px, 1vw, 12px) clamp(10px, 2vw, 20px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(6px, 1vw, 12px);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+}
+
+.link-home {
+  color: #d4af37;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: clamp(0.75rem, 1vw, 0.95rem);
+  transition: 0.3s;
+}
+
+.link-home:hover {
+  color: #f7df8a;
+}
+
+.titulo {
+  color: #d4af37;
+  font-size: clamp(1rem, 2vw, 1.4rem);
+  text-align: center;
+  flex: 1;
+  line-height: 1.2;
+}
+
+.logo {
+  width: clamp(30px, 4vw, 45px);
+}
+
+.container {
+  padding-top: clamp(140px, 18vw, 200px);
+  padding-bottom: clamp(40px, 6vw, 80px);
+  width: 100%;
+}
+
+.secao {
+  width: 100%;
+  max-width: 1400px;
+  margin: clamp(40px, 6vw, 80px) auto;
+  padding: 0 clamp(10px, 3vw, 30px);
+}
+
+.secao-titulo {
+  text-align: center;
+  color: #d4af37;
+  font-size: clamp(1.6rem, 4vw, 3rem);
+  margin-bottom: clamp(20px, 4vw, 50px);
+}
+
+.grid-videos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: clamp(15px, 3vw, 35px);
+  width: 100%;
+}
+
+.card-video {
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid #d4af37;
+  border-radius: clamp(8px, 1vw, 14px);
+  padding: clamp(10px, 2vw, 18px);
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+  transition: 0.3s;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.card-video:hover {
+  transform: translateY(-5px);
+}
+
+.card-video iframe {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 8px;
+  margin-bottom: clamp(10px, 2vw, 15px);
+}
+
+.card-video p {
+  font-size: clamp(0.85rem, 1.2vw, 1rem);
+  line-height: 1.6;
+  color: #eee;
+  text-align: left;
+  flex: 1;
+}
+
+@media (hover: none) {
+  .card-video:hover {
+    transform: none;
+  }
+}
+
+@media (max-width: 600px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .nav {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .titulo {
+    order: -1;
+  }
+
+  .card-video p {
+    text-align: center;
+  }
+}
