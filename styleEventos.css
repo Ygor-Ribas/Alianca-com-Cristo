@@ -106,7 +106,7 @@ body {
   transform: translateY(-5px);
 }
 
-.card-video iframe {
+.card-video video {
   width: 100%;
   aspect-ratio: 16 / 9;
   border-radius: 8px;
