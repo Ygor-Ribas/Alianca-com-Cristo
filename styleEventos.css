@@ -61,6 +61,8 @@ body {
 
 .logo {
   width: clamp(30px, 4vw, 45px);
+  height: clamp(30px, 4vw, 45px);
+  object-fit: contain;
 }
 
 .container {
@@ -106,11 +108,15 @@ body {
   transform: translateY(-5px);
 }
 
-.card-video iframe {
+.card-video iframe,
+.card-video img {
   width: 100%;
-  aspect-ratio: 16 / 9;
+  height: 200px;
+  object-fit: contain;
   border-radius: 8px;
+  display: block;
   margin-bottom: clamp(10px, 2vw, 15px);
+  background: #000;
 }
 
 .card-video p {
@@ -143,5 +149,10 @@ body {
 
   .card-video p {
     text-align: center;
+  }
+
+  .card-video iframe,
+  .card-video img {
+    height: 180px;
   }
 }
