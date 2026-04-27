@@ -1,21 +1,28 @@
 const menuToggle = document.getElementById("menu-toggle");
-const navLoja = document.getElementById("nav-loja");
+const navPrincipal = document.getElementById("nav-principal");
 
 menuToggle.addEventListener("click", () => {
-  navLoja.classList.toggle("active");
+  navPrincipal.classList.toggle("active");
 });
 
 document.addEventListener("click", (event) => {
-  const clicouNoMenu = navLoja.contains(event.target);
+  const clicouNoMenu = navPrincipal.contains(event.target);
   const clicouNoBotao = menuToggle.contains(event.target);
 
   if (!clicouNoMenu && !clicouNoBotao) {
-    navLoja.classList.remove("active");
+    navPrincipal.classList.remove("active");
   }
 });
 
 document.addEventListener("keydown", (event) => {
   if (event.key === "Escape") {
-    navLoja.classList.remove("active");
+    navPrincipal.classList.remove("active");
   }
+});
+
+// Fecha o menu ao clicar em um link
+document.querySelectorAll(".nav-principal a").forEach((link) => {
+  link.addEventListener("click", () => {
+    navPrincipal.classList.remove("active");
+  });
 });

@@ -396,6 +396,7 @@ nav a:hover {
 }
 
 .menu-toggle {
+  display: none;
   position: fixed;
   top: 18px;
   left: 20px;
@@ -492,8 +493,38 @@ nav a:hover {
   }
 
   .menu-toggle {
-    display: block;
-  }
+  display: block;
+}
+
+.nav-principal {
+  position: fixed;
+  top: 0;
+  left: -100%;
+  width: 280px;
+  max-width: 80%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.97);
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 90px 30px 30px;
+  gap: 22px;
+  transition: left 0.4s ease;
+  z-index: 2000;
+  border-right: 1px solid rgba(212, 175, 55, 0.35);
+}
+
+.nav-principal.active {
+  left: 0;
+}
+
+.nav-principal a {
+  width: 100%;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+}
 }
 
 @media (max-width: 1024px) {
