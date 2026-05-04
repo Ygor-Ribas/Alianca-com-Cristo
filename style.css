@@ -460,6 +460,151 @@ nav a:hover {
   padding-left: 10px;
 }
 
+body.site-carregando {
+  overflow: hidden;
+}
+
+main,
+footer,
+header {
+  opacity: 0;
+  transform: scale(1.05);
+  transition: opacity 1.8s ease, transform 1.8s ease;
+}
+
+body.site-revelado main,
+body.site-revelado footer,
+body.site-revelado header {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.intro-cinematica {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at center, #111 0%, #000 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999;
+  overflow: hidden;
+}
+
+.intro-luz {
+  position: absolute;
+  width: 900px;
+  height: 900px;
+  background: radial-gradient(
+    circle,
+    rgba(212, 175, 55, 0.4) 0%,
+    rgba(212, 175, 55, 0.12) 35%,
+    transparent 70%
+  );
+  animation: pulsarLuz 3s ease-in-out infinite;
+}
+
+.intro-particulas {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle, rgba(212, 175, 55, 0.9) 1px, transparent 1px),
+    radial-gradient(circle, rgba(247, 223, 138, 0.6) 1px, transparent 1px);
+  background-size: 80px 80px, 120px 120px;
+  animation: moverParticulas 18s linear infinite;
+  opacity: 0.5;
+}
+
+.intro-logo-container {
+  position: relative;
+  text-align: center;
+  z-index: 2;
+}
+
+.intro-logo {
+  width: 220px;
+  opacity: 0;
+  transform: scale(0.3) rotate(-180deg);
+  animation: entradaLogo 2s ease forwards;
+  filter: drop-shadow(0 0 35px rgba(212, 175, 55, 0.8));
+}
+
+.intro-titulo {
+  margin-top: 20px;
+  font-size: clamp(2rem, 5vw, 4.5rem);
+  color: #d4af37;
+  letter-spacing: 4px;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: entradaTitulo 1.5s ease forwards;
+  animation-delay: 1.6s;
+  text-shadow: 0 0 20px rgba(212, 175, 55, 0.7);
+}
+
+.intro-cinematica.expandir {
+  animation: revelarSite 2s cubic-bezier(0.77, 0, 0.18, 1) forwards;
+}
+
+@keyframes entradaLogo {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) rotate(-180deg);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.15) rotate(10deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0);
+  }
+}
+
+@keyframes entradaTitulo {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+    letter-spacing: 12px;
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    letter-spacing: 4px;
+  }
+}
+
+@keyframes pulsarLuz {
+  0%,
+  100% {
+    transform: scale(0.9);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 1;
+  }
+}
+
+@keyframes moverParticulas {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-120px);
+  }
+}
+
+@keyframes revelarSite {
+  0% {
+    clip-path: circle(100% at center);
+    opacity: 1;
+  }
+  100% {
+    clip-path: circle(0% at center);
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
 @media (max-width: 768px) {
   nav {
     position: fixed;
