@@ -8,18 +8,24 @@
   </head>
   <body>
     <header class="header">
-      <nav class="nav2">
-        <a href="index.html" class="link-home">Tela Inicial</a>
-        <h1 class="titulo">Sexta-Feira Santa | Aliança com Cristo</h1>
-        <img src="imagend/cruz.webp" class="logo" alt="" />
-      </nav>
-    </header>
-
-    <header class="header-menu">
       <nav class="nav">
-        <a href="#ensaios" class="link-home">Ensaios</a
-        ><a href="#apresentacao" class="link-home">Apresentação</a
-        ><a href="#fotos" class="link-home">Fotos</a>
+        <div class="menu-container">
+          <button class="menu-btn" id="menu-btn">☰</button>
+
+          <div class="menu-hamburger" id="menu-hamburger">
+            <a href="index.html">Tela Inicial</a>
+            <a href="#ensaios" class="link-home">Ensaios Sexta-Feira Santa</a
+            ><a href="#apresentacao" class="link-home"
+              >Apresentação Sexta-Feira Santa</a
+            ><a href="#fotos" class="link-home">Fotos Sexta-Feira Santa</a> <br> <br>
+
+            <a href="indexRetiro.html">Retiro</a>
+          </div>
+        </div>
+
+        <h1 class="titulo">Sexta-Feira Santa | Aliança com Cristo</h1>
+
+        <img src="imagend/cruz.webp" class="logo" alt="" />
       </nav>
     </header>
 
@@ -447,5 +453,8 @@
         </div>
       </section>
     </main>
+
+    <script src="https://api.dmcdn.net/all.js"></script>
+    <script src="scriptSextaSanta.js"></script>
   </body>
 </html>
