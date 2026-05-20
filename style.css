@@ -28,7 +28,7 @@ main {
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
-  padding: 20px 24px 40px;
+  padding: 120px 24px 40px;
 }
 
 header {
@@ -36,8 +36,8 @@ header {
   top: 0;
   left: 0;
   width: 100%;
-  margin: 0;
   background-color: #1a1a1a;
+  z-index: 9999;
 }
 
 nav {
@@ -469,7 +469,9 @@ footer,
 header {
   opacity: 0;
   transform: scale(1.05);
-  transition: opacity 1.8s ease, transform 1.8s ease;
+  transition:
+    opacity 1.8s ease,
+    transform 1.8s ease;
 }
 
 body.site-revelado main,
@@ -509,7 +511,9 @@ body.site-revelado header {
   background-image:
     radial-gradient(circle, rgba(212, 175, 55, 0.9) 1px, transparent 1px),
     radial-gradient(circle, rgba(247, 223, 138, 0.6) 1px, transparent 1px);
-  background-size: 80px 80px, 120px 120px;
+  background-size:
+    80px 80px,
+    120px 120px;
   animation: moverParticulas 18s linear infinite;
   opacity: 0.5;
 }
@@ -638,38 +642,38 @@ body.site-revelado header {
   }
 
   .menu-toggle {
-  display: block;
-}
+    display: block;
+  }
 
-.nav-principal {
-  position: fixed;
-  top: 0;
-  left: -100%;
-  width: 280px;
-  max-width: 80%;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.97);
-  backdrop-filter: blur(10px);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  padding: 90px 30px 30px;
-  gap: 22px;
-  transition: left 0.4s ease;
-  z-index: 2000;
-  border-right: 1px solid rgba(212, 175, 55, 0.35);
-}
+  .nav-principal {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 280px;
+    max-width: 80%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.97);
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 90px 30px 30px;
+    gap: 22px;
+    transition: left 0.4s ease;
+    z-index: 2000;
+    border-right: 1px solid rgba(212, 175, 55, 0.35);
+  }
 
-.nav-principal.active {
-  left: 0;
-}
+  .nav-principal.active {
+    left: 0;
+  }
 
-.nav-principal a {
-  width: 100%;
-  padding: 12px 0;
-  border-bottom: 1px solid rgba(212, 175, 55, 0.15);
-}
+  .nav-principal a {
+    width: 100%;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+  }
 }
 
 @media (max-width: 1024px) {
