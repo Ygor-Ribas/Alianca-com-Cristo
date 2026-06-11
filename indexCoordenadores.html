@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Painel dos Coordenadores</title>
+    <link rel="stylesheet" href="coordenadores.css" />
+  </head>
+
+  <body>
+    <header class="header">
+      <nav class="nav">
+        <a href="index.html" class="btn-voltar">← Voltar</a>
+
+        <h1 class="titulo">Painel dos Coordenadores</h1>
+
+        <img
+          src="imagend/cruz.webp"
+          alt="Logo Aliança com Cristo"
+          class="logo"
+        />
+      </nav>
+    </header>
+
+    <main class="container">
+      <section class="painel-topo">
+        <h2>Área Administrativa</h2>
+
+        <p>
+          Utilize este painel para adicionar novas fotos e vídeos ao site do
+          grupo.
+        </p>
+      </section>
+
+      <section class="card-publicacao">
+        <h2>Nova Publicação</h2>
+
+        <form class="form-publicacao">
+          <label for="titulo">Título</label>
+
+          <input
+            type="text"
+            id="titulo"
+            name="titulo"
+            placeholder="Digite o título da publicação"
+            required
+          />
+
+          <label for="descricao">Descrição</label>
+
+          <textarea
+            id="descricao"
+            name="descricao"
+            rows="6"
+            placeholder="Digite a descrição da publicação"
+            required
+          ></textarea>
+
+          <label for="tipo">Tipo de Conteúdo</label>
+
+          <select id="tipo" name="tipo" required>
+            <option value="">Selecione uma opção</option>
+            <option value="foto">Foto</option>
+            <option value="video">Vídeo</option>
+          </select>
+
+          <label for="arquivo">Selecionar Arquivo</label>
+
+          <input
+            type="file"
+            id="arquivo"
+            name="arquivo"
+            accept="image/*,video/*"
+            required
+          />
+
+          <button type="submit">
+            Publicar Conteúdo
+          </button>
+        </form>
+      </section>
+    </main>
+  </body>
+</html>

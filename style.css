@@ -550,6 +550,162 @@ body.site-revelado header {
   animation: revelarSite 2s cubic-bezier(0.77, 0, 0.18, 1) forwards;
 }
 
+.login-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(6px);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999;
+}
+
+.login-overlay.active {
+  display: flex;
+}
+
+.login-modal {
+  width: 90%;
+  max-width: 450px;
+  background: rgba(15, 15, 15, 0.98);
+  border: 1px solid #d4af37;
+  border-radius: 20px;
+  padding: 35px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  box-shadow: 0 0 30px rgba(212, 175, 55, 0.25);
+  animation: aparecerLogin 0.3s ease;
+}
+
+@keyframes aparecerLogin {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(-15px);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.login-logo {
+  width: 90px;
+  margin: 0 auto;
+}
+
+.login-modal h2 {
+  text-align: center;
+  color: #d4af37;
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.login-modal input {
+  width: 100%;
+  padding: 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  background: rgba(255, 255, 255, 0.08);
+  color: white;
+  outline: none;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.login-modal input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.login-modal input:focus {
+  border-color: #d4af37;
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.4);
+}
+
+.login-botoes {
+  display: flex;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.login-botoes button {
+  flex: 1;
+  padding: 14px;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.login-botoes button:hover {
+  transform: translateY(-3px);
+}
+
+.login-botoes button:active {
+  transform: scale(0.96);
+}
+
+#entrar-login {
+  background: linear-gradient(180deg, #f0cf68, #d4af37);
+  color: #111;
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.35);
+}
+
+#entrar-login:hover {
+  box-shadow: 0 0 25px rgba(212, 175, 55, 0.8);
+}
+
+#cancelar-login {
+  background: #333;
+  color: white;
+}
+
+#cancelar-login:hover {
+  background: #444;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.15);
+}
+
+@media (max-width: 768px) {
+  .login-modal {
+    padding: 25px;
+  }
+
+  .login-modal h2 {
+    font-size: 1.6rem;
+  }
+
+  .login-logo {
+    width: 75px;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-modal {
+    width: 95%;
+    padding: 20px;
+  }
+
+  .login-botoes {
+    flex-direction: column;
+  }
+
+  .login-botoes button {
+    width: 100%;
+  }
+
+  .login-modal h2 {
+    font-size: 1.4rem;
+  }
+
+  .login-logo {
+    width: 65px;
+  }
+}
+
 @keyframes entradaLogo {
   0% {
     opacity: 0;
