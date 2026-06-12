@@ -579,6 +579,39 @@ body.site-revelado header {
   animation: aparecerLogin 0.3s ease;
 }
 
+.toast {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: rgba(15, 15, 15, 0.95);
+  border: 1px solid #d4af37;
+  color: #fff;
+  padding: 16px 22px;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+  font-size: 1rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: 0.4s ease;
+  z-index: 999999;
+  min-width: 220px;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.toast.sucesso {
+  border-color: #4caf50;
+  box-shadow: 0 0 20px rgba(76, 175, 80, 0.3);
+}
+
+.toast.erro {
+  border-color: #ff4d4d;
+  box-shadow: 0 0 20px rgba(255, 77, 77, 0.3);
+}
+
 @keyframes aparecerLogin {
   from {
     opacity: 0;
