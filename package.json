@@ -4,8 +4,8 @@
   "description": "",
   "main": "script.js",
   "scripts": {
-  "start": "node server.js"
-},
+    "start": "node server.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Ygor-Ribas/Alianca-com-Cristo.git"
