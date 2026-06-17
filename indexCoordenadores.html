@@ -56,6 +56,22 @@
             required
           ></textarea>
 
+          <label for="categoria">Categoria</label>
+
+          <select id="categoria" name="categoria" required>
+            <option value="">Selecione uma categoria</option>
+            <option value="retiro">Retiro</option>
+            <option value="sexta_santa">Sexta Santa</option>
+            <option value="momentos">Momentos</option>
+            <option value="saiba_mais">Saiba Mais</option>
+          </select>
+
+          <label for="subcategoria">Subcategoria</label>
+
+          <select id="subcategoria" name="subcategoria" required>
+            <option value="">Selecione uma subcategoria</option>
+          </select>
+
           <label for="tipo">Tipo de Conteúdo</label>
 
           <select id="tipo" name="tipo" required>
@@ -78,6 +94,12 @@
             Publicar Conteúdo
           </button>
         </form>
+      </section>
+
+      <section class="card-publicacao">
+        <h2>Gerenciar Publicações</h2>
+
+        <div id="lista-publicacoes"></div>
       </section>
     </main>
 
