@@ -1,17 +1,30 @@
-const session = require("express-session");
-const bcrypt = require("bcrypt");
-const cookieParser = require("cookie-parser");
-
-
-
 require("dotenv").config();
 
 const express = require("express");
 const mysql = require("mysql2");
-const multer = require("multer");
-const path = require("path");
+const bcrypt = require("bcrypt");
+const session = require("express-session");
+const cookieParser = require("cookie-parser");
 
 const app = express();
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      maxAge: 1000 * 60 * 60 * 4,
+      httpOnly: true,
+    },
+  })
+);
+
+app.use(express.static(__dirname));
 
 const conexao = mysql.createConnection({
   host: process.env.DB_HOST,
@@ -22,89 +35,91 @@ const conexao = mysql.createConnection({
 
 conexao.connect((erro) => {
   if (erro) {
-    console.error("Erro ao conectar ao MySQL:", erro);
+    console.log(erro);
     return;
   }
 
-  console.log("✅ MySQL conectado com sucesso!");
+  console.log("✅ MySQL conectado");
 });
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    if (file.mimetype.startsWith("image")) {
-      cb(null, "uploads/fotos");
-    } else if (file.mimetype.startsWith("video")) {
-      cb(null, "uploads/videos");
-    } else {
-      cb(new Error("Tipo de arquivo não permitido"));
+function verificarLogin(req, res, next) {
+  if (!req.session.usuario) {
+    return res.status(401).json({
+      sucesso: false,
+      mensagem: "Não autorizado",
+    });
+  }
+
+  next();
+}
+
+app.post("/login", (req, res) => {
+  const { usuario, senha } = req.body;
+
+  const sql = "SELECT * FROM usuarios WHERE usuario = ?";
+
+  conexao.query(sql, [usuario], (erro, resultados) => {
+    if (erro) {
+      return res.status(500).json({
+        sucesso: false,
+        mensagem: "Erro no servidor"
+      });
     }
-  },
 
-  filename: (req, file, cb) => {
-    const nomeArquivo = Date.now() + path.extname(file.originalname);
-    cb(null, nomeArquivo);
-  },
+    if (resultados.length === 0) {
+      return res.json({
+        sucesso: false,
+        mensagem: "Usuário não encontrado"
+      });
+    }
+
+    const usuarioBanco = resultados[0];
+
+    if (senha !== usuarioBanco.senha) {
+      return res.json({
+        sucesso: false,
+        mensagem: "Senha incorreta"
+      });
+    }
+
+    res.json({
+      sucesso: true
+    });
+  });
+});
+app.get("/perfil", verificarLogin, (req, res) => {
+  res.json(req.session.usuario);
 });
 
-const upload = multer({ storage });
+app.post("/logout", verificarLogin, (req, res) => {
+  req.session.destroy(() => {
+    res.json({
+      sucesso: true,
+    });
+  });
+});
 
-app.use(express.static(__dirname));
-
-app.post("/upload", upload.single("arquivo"), (req, res) => {
-  const { titulo, descricao, tipo } = req.body;
-  const arquivo = req.file.filename;
-
-  const sql = `
-    INSERT INTO publicacoes
-    (titulo, descricao, tipo, arquivo)
-    VALUES (?, ?, ?, ?)
-  `;
-
+app.get("/publicacoes", (req, res) => {
   conexao.query(
-    sql,
-    [titulo, descricao, tipo, arquivo],
+    "SELECT * FROM publicacoes ORDER BY criado_em DESC",
     (erro, resultado) => {
       if (erro) {
-        console.error("Erro ao salvar publicação:", erro);
-
         return res.status(500).json({
           sucesso: false,
-          mensagem: "Erro ao salvar no banco.",
         });
       }
 
-      console.log("Publicação salva!");
-
-      res.json({
-        sucesso: true,
-        mensagem: "Publicação salva com sucesso!",
-      });
+      res.json(resultado);
     }
   );
 });
 
-app.get("/publicacoes", (req, res) => {
-  const sql = `
-    SELECT *
-    FROM publicacoes
-    ORDER BY criado_em DESC
-  `;
-
-  conexao.query(sql, (erro, resultados) => {
-    if (erro) {
-      return res.status(500).json({
-        erro: "Erro ao buscar publicações",
-      });
-    }
-
-    res.json(resultados);
-  });
-});
-
 app.get("/", (req, res) => {
-  res.send("Servidor funcionando!");
+  res.send("Servidor funcionando");
 });
 
 app.listen(process.env.PORT, () => {
-  console.log(`🚀 Servidor rodando em http://localhost:${process.env.PORT}`);
+  console.log(
+    `🚀 Servidor rodando em http://localhost:${process.env.PORT}`
+  );
 });

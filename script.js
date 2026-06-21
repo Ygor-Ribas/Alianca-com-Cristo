@@ -74,17 +74,35 @@ if (cancelarLogin && loginOverlay) {
 }
 
 if (entrarLogin && loginOverlay) {
-  const fazerLogin = () => {
-    const usuario = document.getElementById("usuario")?.value.trim();
-    const senha = document.getElementById("senha")?.value.trim();
+  const fazerLogin = async () => {
+    const usuario = document.getElementById("usuario").value.trim();
+    const senha = document.getElementById("senha").value.trim();
 
-    if (usuario === "coordenador" && senha === "123456") {
-      mostrarToast("Login realizado com sucesso!", "sucesso");
-      setTimeout(() => {
-        window.location.href = "indexCoordenadores.html";
-      }, 800);
-    } else {
-      mostrarToast("Usuário ou senha incorretos.", "erro");
+    try {
+      const resposta = await fetch("/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          usuario,
+          senha,
+        }),
+      });
+
+      const dados = await resposta.json();
+
+      if (dados.sucesso) {
+        mostrarToast("Login realizado com sucesso!", "sucesso");
+
+        setTimeout(() => {
+          window.location.href = "indexCoordenadores.html";
+        }, 800);
+      } else {
+        mostrarToast(dados.mensagem, "erro");
+      }
+    } catch (erro) {
+      mostrarToast("Erro ao conectar ao servidor.", "erro");
     }
   };
 
