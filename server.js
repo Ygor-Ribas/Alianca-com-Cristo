@@ -217,6 +217,90 @@ app.post("/logout", verificarLogin, (req, res) => {
   });
 });
 
+app.post(
+  "/upload",
+  verificarLogin,
+  upload.single("arquivo"),
+  (req, res) => {
+    if (!req.file) {
+      return res.status(400).json({
+        sucesso: false,
+        mensagem: "Nenhum arquivo foi enviado.",
+      });
+    }
+
+    const {
+      titulo,
+      descricao,
+      categoria,
+      subcategoria,
+      tipo,
+    } = req.body;
+
+    if (
+      !titulo ||
+      !descricao ||
+      !categoria ||
+      !subcategoria ||
+      !tipo
+    ) {
+      fs.unlinkSync(req.file.path);
+
+      return res.status(400).json({
+        sucesso: false,
+        mensagem: "Preencha todos os campos.",
+      });
+    }
+
+    const sql = `
+      INSERT INTO publicacoes
+      (
+        titulo,
+        descricao,
+        categoria,
+        subcategoria,
+        tipo,
+        arquivo,
+        criado_por
+      )
+      VALUES (?, ?, ?, ?, ?, ?, ?)
+    `;
+
+    const caminhoArquivo = `/uploads/${req.file.filename}`;
+
+    conexao.query(
+      sql,
+      [
+        titulo,
+        descricao,
+        categoria,
+        subcategoria,
+        tipo,
+        caminhoArquivo,
+        req.session.usuario.id,
+      ],
+      (erro, resultado) => {
+        if (erro) {
+          console.error("Erro ao salvar publicação:", erro);
+
+          fs.unlinkSync(req.file.path);
+
+          return res.status(500).json({
+            sucesso: false,
+            mensagem: "Erro ao salvar publicação.",
+          });
+        }
+
+        res.json({
+          sucesso: true,
+          mensagem: "Publicação criada com sucesso!",
+          id: resultado.insertId,
+        });
+      },
+    );
+  },
+);
+
 app.get("/publicacoes", (req, res) => {
   conexao.query(
     `

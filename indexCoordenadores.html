@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
@@ -68,9 +68,13 @@
 
           <label for="subcategoria">Subcategoria</label>
 
-          <select id="subcategoria" name="subcategoria" required>
-            <option value="">Selecione uma subcategoria</option>
-          </select>
+          <input
+            type="text"
+            id="subcategoria"
+            name="subcategoria"
+            placeholder="Digite a subcategoria"
+            required
+          />
 
           <label for="tipo">Tipo de Conteúdo</label>
 
@@ -90,9 +94,7 @@
             required
           />
 
-          <button type="submit">
-            Publicar Conteúdo
-          </button>
+          <button type="submit">Publicar Conteúdo</button>
         </form>
       </section>
 
