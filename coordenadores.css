@@ -19,6 +19,7 @@ html {
 
 body {
   font-family: Georgia, "Times New Roman", Times, serif;
+  background-color: #0d0d0d;
   background-image: url(imagend/fundogrupo.webp);
   background-size: cover;
   background-position: center;
@@ -26,7 +27,14 @@ body {
   background-attachment: fixed;
   color: var(--texto);
   min-height: 100vh;
+  min-height: 100dvh;
   overflow-x: hidden;
+}
+
+@media (hover: none), (pointer: coarse) {
+  body {
+    background-attachment: scroll;
+  }
 }
 
 .header {

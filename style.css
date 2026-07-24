@@ -10,6 +10,7 @@ html {
 
 body {
   font-family: Georgia, "Times New Roman", Times, serif;
+  background-color: #0d0d0d;
   background-image: url(imagend/fundogrupo.webp);
   background-size: cover;
   background-position: center;
@@ -17,6 +18,18 @@ body {
   background-attachment: fixed;
   color: #fff;
   overflow-x: hidden;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+/* Em telas de toque (celular, tablet, notebook 2 em 1) o fundo "fixed"
+   trava e pisca durante o scroll. Usamos scroll nesses dispositivos,
+   independente da largura da tela, e mantemos o efeito fixed apenas
+   em telas com mouse (desktop/notebook). */
+@media (hover: none), (pointer: coarse) {
+  body {
+    background-attachment: scroll;
+  }
 }
 
 main {
