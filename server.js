@@ -308,6 +308,8 @@ app.get("/publicacoes", (req, res) => {
     id,
     titulo,
     descricao,
+    categoria,
+    subcategoria,
     tipo,
     arquivo,
     criado_em
@@ -327,6 +329,128 @@ app.get("/publicacoes", (req, res) => {
       }
 
       res.json(resultados);
+    },
+  );
+});
+
+app.put(
+  "/publicacoes/:id",
+  verificarLogin,
+  upload.single("arquivo"),
+  (req, res) => {
+    const { id } = req.params;
+
+    const { titulo, descricao, categoria, subcategoria, tipo } = req.body;
+
+    if (!titulo || !descricao || !categoria || !subcategoria || !tipo) {
+      if (req.file) fs.unlinkSync(req.file.path);
+
+      return res.status(400).json({
+        sucesso: false,
+        mensagem: "Preencha todos os campos.",
+      });
+    }
+
+    conexao.query(
+      "SELECT arquivo FROM publicacoes WHERE id = ? AND ativo = TRUE",
+      [id],
+      (erro, resultados) => {
+        if (erro) {
+          if (req.file) fs.unlinkSync(req.file.path);
+
+          return res.status(500).json({
+            sucesso: false,
+            mensagem: "Erro interno.",
+          });
+        }
+
+        if (resultados.length === 0) {
+          if (req.file) fs.unlinkSync(req.file.path);
+
+          return res.status(404).json({
+            sucesso: false,
+            mensagem: "Publicação não encontrada.",
+          });
+        }
+
+        const arquivoAntigo = resultados[0].arquivo;
+
+        const novoCaminhoArquivo = req.file
+          ? `/uploads/${req.file.filename}`
+          : arquivoAntigo;
+
+        const sql = `
+          UPDATE publicacoes
+          SET titulo = ?, descricao = ?, categoria = ?, subcategoria = ?, tipo = ?, arquivo = ?
+          WHERE id = ?
+        `;
+
+        conexao.query(
+          sql,
+          [
+            titulo,
+            descricao,
+            categoria,
+            subcategoria,
+            tipo,
+            novoCaminhoArquivo,
+            id,
+          ],
+          (erro) => {
+            if (erro) {
+              if (req.file) fs.unlinkSync(req.file.path);
+
+              return res.status(500).json({
+                sucesso: false,
+                mensagem: "Erro ao atualizar publicação.",
+              });
+            }
+
+            if (req.file && arquivoAntigo) {
+              const caminhoAntigo = path.join(
+                __dirname,
+                arquivoAntigo.replace(/^\//, ""),
+              );
+
+              fs.unlink(caminhoAntigo, () => {});
+            }
+
+            res.json({
+              sucesso: true,
+              mensagem: "Publicação atualizada com sucesso!",
+            });
+          },
+        );
+      },
+    );
+  },
+);
+
+app.delete("/publicacoes/:id", verificarLogin, (req, res) => {
+  const { id } = req.params;
+
+  conexao.query(
+    "UPDATE publicacoes SET ativo = FALSE WHERE id = ?",
+    [id],
+    (erro, resultado) => {
+      if (erro) {
+        return res.status(500).json({
+          sucesso: false,
+          mensagem: "Erro ao excluir publicação.",
+        });
+      }
+
+      if (resultado.affectedRows === 0) {
+        return res.status(404).json({
+          sucesso: false,
+          mensagem: "Publicação não encontrada.",
+        });
+      }
+
+      res.json({
+        sucesso: true,
+        mensagem: "Publicação excluída com sucesso!",
+      });
     },
   );
 });
