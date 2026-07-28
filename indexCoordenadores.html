@@ -30,34 +30,46 @@
           Utilize este painel para adicionar novas fotos e vídeos ao site do
           grupo.
         </p>
+
+        <p style="margin-top: 14px">
+          <button type="button" id="btn-sair" class="btn-excluir" style="padding: 10px 22px">
+            Sair
+          </button>
+        </p>
       </section>
 
       <section class="card-publicacao">
         <h2>Nova Publicação</h2>
 
+        <p class="aviso-seguranca">
+          As fotos e vídeos enviados aqui ficam visíveis para qualquer
+          visitante do site, com o download desativado nos players. Se o
+          conteúdo for um vídeo, você pode marcar o trecho (início e fim) que
+          deve ser exibido no site, sem precisar cortar o arquivo original.
+        </p>
+
         <form class="form-publicacao">
           <label for="titulo">Título</label>
-
           <input
             type="text"
             id="titulo"
             name="titulo"
             placeholder="Digite o título da publicação"
+            maxlength="150"
             required
           />
 
           <label for="descricao">Descrição</label>
-
           <textarea
             id="descricao"
             name="descricao"
             rows="6"
             placeholder="Digite a descrição da publicação"
+            maxlength="2000"
             required
           ></textarea>
 
           <label for="categoria">Categoria</label>
-
           <select id="categoria" name="categoria" required>
             <option value="">Selecione uma categoria</option>
             <option value="retiro">Retiro</option>
@@ -67,17 +79,16 @@
           </select>
 
           <label for="subcategoria">Subcategoria</label>
-
           <input
             type="text"
             id="subcategoria"
             name="subcategoria"
             placeholder="Digite a subcategoria"
+            maxlength="150"
             required
           />
 
           <label for="tipo">Tipo de Conteúdo</label>
-
           <select id="tipo" name="tipo" required>
             <option value="">Selecione uma opção</option>
             <option value="foto">Foto</option>
@@ -85,14 +96,37 @@
           </select>
 
           <label for="arquivo">Selecionar Arquivo</label>
-
           <input
             type="file"
             id="arquivo"
             name="arquivo"
-            accept="image/*,video/*"
+            accept="image/jpeg,image/png,image/webp,video/mp4,video/webm"
             required
           />
+
+          <div class="painel-recorte" id="painel-recorte">
+            <p style="color: var(--texto-secundario); font-size: 0.85rem">
+              Ajuste o início e o fim do trecho do vídeo que deve aparecer no
+              site.
+            </p>
+
+            <video id="video-preview" muted></video>
+
+            <div class="recorte-linha">
+              <label for="tempo-inicio">Início</label>
+              <input type="range" id="tempo-inicio" min="0" max="0" step="1" value="0" />
+            </div>
+
+            <div class="recorte-linha">
+              <label for="tempo-fim">Fim</label>
+              <input type="range" id="tempo-fim" min="0" max="0" step="1" value="0" />
+            </div>
+
+            <div class="recorte-valores">
+              <span id="valor-inicio">Início: 0s</span>
+              <span id="valor-fim">Fim: 0s</span>
+            </div>
+          </div>
 
           <button type="submit">Publicar Conteúdo</button>
         </form>
@@ -100,11 +134,11 @@
 
       <section class="card-publicacao">
         <h2>Gerenciar Publicações</h2>
-
         <div id="lista-publicacoes"></div>
       </section>
     </main>
 
+    <script src="protecao.js"></script>
     <script src="coordenadores.js"></script>
   </body>
 </html>

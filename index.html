@@ -209,12 +209,16 @@
       type="text"
       id="usuario"
       placeholder="Usuário"
+      autocomplete="username"
+      maxlength="80"
     >
 
     <input
       type="password"
       id="senha"
       placeholder="Senha"
+      autocomplete="current-password"
+      maxlength="200"
     >
 
     <div class="login-botoes">
@@ -230,6 +234,7 @@
   </div>
 </div>
 
+    <script src="protecao.js"></script>
     <script src="script.js"></script>
   </body>
 </html>

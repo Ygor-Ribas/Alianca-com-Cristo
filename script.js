@@ -76,18 +76,24 @@ if (cancelarLogin && loginOverlay) {
 if (entrarLogin && loginOverlay) {
   const fazerLogin = async () => {
     const usuario = document.getElementById("usuario").value.trim();
-    const senha = document.getElementById("senha").value.trim();
+    const senha = document.getElementById("senha").value;
+
+    if (!usuario || !senha) {
+      mostrarToast("Preencha usuário e senha.", "erro");
+      return;
+    }
 
     try {
+      const token = await window.obterTokenCsrf();
+
       const resposta = await fetch("/login", {
         method: "POST",
+        credentials: "same-origin",
         headers: {
           "Content-Type": "application/json",
+          "x-csrf-token": token,
         },
-        body: JSON.stringify({
-          usuario,
-          senha,
-        }),
+        body: JSON.stringify({ usuario, senha }),
       });
 
       const dados = await resposta.json();
@@ -112,32 +118,6 @@ if (entrarLogin && loginOverlay) {
     if (loginOverlay.classList.contains("active") && event.key === "Enter") {
       fazerLogin();
     }
-  });
-}
-
-const formulario = document.querySelector(".form-publicacao");
-
-if (formulario) {
-  formulario.addEventListener("submit", (e) => {
-    e.preventDefault();
-
-    const titulo = document.getElementById("titulo")?.value;
-    const descricao = document.getElementById("descricao")?.value;
-    const tipo = document.getElementById("tipo")?.value;
-    const arquivo = document.getElementById("arquivo")?.files[0];
-
-    if (!arquivo) {
-      mostrarToast("Selecione um arquivo.", "erro");
-      return;
-    }
-
-    console.log("Título:", titulo);
-    console.log("Descrição:", descricao);
-    console.log("Tipo:", tipo);
-    console.log("Arquivo:", arquivo);
-
-    mostrarToast("Publicação enviada com sucesso!", "sucesso");
-    formulario.reset();
   });
 }
 

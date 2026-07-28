@@ -154,6 +154,65 @@ body {
   min-height: 150px;
 }
 
+.aviso-seguranca {
+  background: rgba(212, 175, 55, 0.08);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  border-radius: 10px;
+  padding: 14px 18px;
+  color: var(--texto-secundario);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin-top: -5px;
+}
+
+.painel-recorte {
+  display: none;
+  flex-direction: column;
+  gap: 12px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  border-radius: 12px;
+  padding: 18px;
+}
+
+.painel-recorte.ativo {
+  display: flex;
+}
+
+.painel-recorte video {
+  width: 100%;
+  max-width: 420px;
+  max-height: 320px;
+  margin: 0 auto;
+  border-radius: 10px;
+  background: #000;
+  display: block;
+}
+
+.recorte-linha {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.recorte-linha label {
+  color: var(--dourado);
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.recorte-linha input[type="range"] {
+  width: 100%;
+  accent-color: var(--dourado);
+}
+
+.recorte-valores {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: var(--texto-secundario);
+}
+
 .form-publicacao button {
   border: none;
   cursor: pointer;
@@ -202,6 +261,18 @@ body {
   aspect-ratio: 16/9;
   object-fit: cover;
   display: block;
+  max-height: 340px;
+}
+
+.grid-publicacoes {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.card-conteudo {
+  max-width: 480px;
+  margin: 0 auto;
+  width: 100%;
 }
 
 .conteudo-info {
