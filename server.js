@@ -12,7 +12,6 @@ const path = require("path");
 const helmet = require("helmet");
 const rateLimit = require("express-rate-limit");
 const { body, validationResult } = require("express-validator");
-const { fileTypeFromFile } = require("file-type");
 const sharp = require("sharp");
 
 // ------------------------------------------------------------------
@@ -173,22 +172,46 @@ function extosPermitido(mimetype) {
 // Confere a "assinatura" real do arquivo (magic bytes), não apenas o
 // cabeçalho enviado pelo navegador, que pode ser falsificado. Se o
 // conteúdo real não bater com o mimetype declarado, o arquivo é
-// removido e a publicação é rejeitada.
+// removido e a publicação é rejeitada. Implementado sem depender de
+// pacotes externos para evitar problemas de compatibilidade ESM/CJS.
+function lerAssinatura(caminho, bytes) {
+  const fd = fs.openSync(caminho, "r");
+  const buffer = Buffer.alloc(bytes);
+  fs.readSync(fd, buffer, 0, bytes, 0);
+  fs.closeSync(fd);
+  return buffer;
+}
+
+function assinaturaCorresponde(mimetypeDeclarado, buffer) {
+  const inicioHex = buffer.toString("hex", 0, 12);
+
+  switch (mimetypeDeclarado) {
+    case "image/jpeg":
+      return inicioHex.startsWith("ffd8ff");
+    case "image/png":
+      return inicioHex.startsWith("89504e470d0a1a0a");
+    case "image/webp":
+      return (
+        buffer.toString("ascii", 0, 4) === "RIFF" &&
+        buffer.toString("ascii", 8, 12) === "WEBP"
+      );
+    case "video/mp4":
+      return buffer.toString("ascii", 4, 8) === "ftyp";
+    case "video/webm":
+      return inicioHex.startsWith("1a45dfa3");
+    default:
+      return false;
+  }
+}
+
 async function validarArquivoReal(caminho, mimetypeDeclarado) {
-  const tipoReal = await fileTypeFromFile(caminho);
-
-  if (!tipoReal) return false;
-
-  const gruposEquivalentes = {
-    "image/jpeg": ["image/jpeg"],
-    "image/png": ["image/png"],
-    "image/webp": ["image/webp"],
-    "video/mp4": ["video/mp4"],
-    "video/webm": ["video/webm"],
-  };
-
-  const validos = gruposEquivalentes[mimetypeDeclarado] || [];
-  return validos.includes(tipoReal.mime);
+  try {
+    const buffer = lerAssinatura(caminho, 16);
+    return assinaturaCorresponde(mimetypeDeclarado, buffer);
+  } catch (erro) {
+    console.error("Erro ao validar assinatura do arquivo:", erro);
+    return false;
+  }
 }
 
 // Reprocessa imagens (remove metadados/EXIF, recomprime, limita

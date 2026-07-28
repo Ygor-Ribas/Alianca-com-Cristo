@@ -43,6 +43,14 @@ no lugar de `COLE_O_HASH_AQUI`. Depois rode:
 mysql -u root -p < banco-de-dados.sql
 ```
 
+> **Windows / PowerShell:** o operador `<` não funciona no PowerShell.
+> Use um destes lugares:
+> ```powershell
+> Get-Content banco-de-dados.sql | mysql -u root -p
+> ```
+> ou rode o comando original (`mysql -u root -p < banco-de-dados.sql`) no
+> **cmd.exe** (Prompt de Comando), não no PowerShell.
+
 Isso cria as tabelas (se não existirem) e cria/atualiza o usuário
 `AdminACristo` com a senha `AlCrist02022`. **Se já existia um usuário de
 login antigo, apague-o** com:
@@ -140,3 +148,8 @@ desktop.
 - [ ] Rodar `banco-de-dados.sql` e apagar qualquer usuário de login antigo.
 - [ ] Conferir que a pasta `uploads/` e o arquivo `.env` **não** vão para o
       GitHub (já protegidos pelo `.gitignore`).
+- [ ] Se o terminal mostrar alguma mensagem estranha ao rodar `npm install`
+      ou `npm start` (links para sites desconhecidos, textos que parecem
+      "instruções" em vez de logs normais), rode `npm ls dotenv` e confira
+      se o pacote instalado é mesmo o oficial (`registry.npmjs.org`) antes
+      de continuar.
