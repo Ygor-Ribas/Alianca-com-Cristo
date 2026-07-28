@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS publicacoes (
 --    DELETE FROM usuarios WHERE usuario = 'nome_do_usuario_antigo';
 
 INSERT INTO usuarios (nome, usuario, senha, cargo, ativo)
-VALUES ('Administrador', 'AdminACristo', 'COLE_O_HASH_AQUI', 'coordenador', TRUE)
+VALUES ('Administrador', 'AdminACristo', '$2b$12$bGnwgKRvljp90DZVSAab.OYrDEZGcFqNRot07an./Shz2PDQMm/Ca', 'coordenador', TRUE)
 ON DUPLICATE KEY UPDATE
   senha = VALUES(senha),
   ativo = TRUE;
