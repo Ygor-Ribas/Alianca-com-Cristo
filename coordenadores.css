@@ -348,7 +348,7 @@ body::before {
 
 .grid-publicacoes {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 28px;
   max-width: 1600px;
   margin: 0 auto;
@@ -488,7 +488,7 @@ body::before {
 /* ---------- Responsivo ---------- */
 @media (max-width: 1400px) {
   .grid-publicacoes {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
@@ -509,7 +509,7 @@ body::before {
 
 @media (max-width: 992px) {
   .grid-publicacoes {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
@@ -603,4 +603,39 @@ body::before {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* ---------- Cartões sempre do mesmo tamanho ---------- */
+.grid-publicacoes {
+  grid-auto-rows: 1fr;
+  align-items: stretch;
+}
+
+.card-conteudo {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  height: 100%;
+}
+
+.card-conteudo img,
+.card-conteudo video {
+  flex: none;
+  height: auto;
+  max-height: none;
+  aspect-ratio: 16 / 9;
+}
+
+.conteudo-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.conteudo-info p {
+  overflow-wrap: anywhere;
+}
+
+.conteudo-info .acoes {
+  margin-top: auto;
 }

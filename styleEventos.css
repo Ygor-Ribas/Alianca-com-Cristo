@@ -276,7 +276,7 @@ body::before {
 /* ---------- Grade e cartões ---------- */
 .grid-videos {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 32px;
   max-width: 1600px;
   margin: 0 auto;
@@ -371,7 +371,7 @@ body::before {
 /* ---------- Responsivo ---------- */
 @media (max-width: 1400px) {
   .grid-videos {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
@@ -391,7 +391,7 @@ body::before {
 
 @media (max-width: 992px) {
   .grid-videos {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
@@ -503,4 +503,41 @@ body::before {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* ---------- Cartões sempre do mesmo tamanho ----------
+   Todas as colunas têm a mesma largura, todas as linhas têm a mesma
+   altura e a mídia (foto/vídeo) tem sempre proporção 16:9, não importa
+   o tamanho da legenda. */
+.grid-videos {
+  grid-auto-rows: 1fr;
+  align-items: stretch;
+}
+
+.grid-videos > p {
+  grid-row: auto;
+}
+
+.card-video {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  height: 100%;
+}
+
+.card-video iframe,
+.card-video img,
+.card-video video {
+  flex: none;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+}
+
+.card-video p {
+  overflow-wrap: anywhere;
+}
+
+.card-texto {
+  height: auto;
 }
