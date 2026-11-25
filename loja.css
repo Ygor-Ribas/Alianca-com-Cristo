@@ -1,3 +1,18 @@
+/* ==========================================================
+   Loja Aliança com Cristo
+   ========================================================== */
+
+:root {
+  --ouro: #d4af37;
+  --ouro-claro: #f7df8a;
+  --ouro-escuro: #a8841f;
+  --linha: rgba(212, 175, 55, 0.28);
+  --texto-suave: #cfc8b8;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --serif: Georgia, "Times New Roman", Times, serif;
+  --sans: "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -6,19 +21,33 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 90px;
 }
 
 body {
-  font-family: Georgia, "Times New Roman", Times, serif;
-  background-color: #0d0d0d;
+  font-family: var(--serif);
+  background-color: #0b0b0d;
   background-image: url(imagend/fundogrupo.webp);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  color: #fff;
+  color: #f4efe4;
   min-height: 100vh;
   min-height: 100dvh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(212, 175, 55, 0.1), transparent 55%),
+    linear-gradient(180deg, rgba(6, 6, 8, 0.8), rgba(6, 6, 8, 0.92));
+  pointer-events: none;
 }
 
 @media (hover: none), (pointer: coarse) {
@@ -27,129 +56,225 @@ body {
   }
 }
 
+::selection {
+  background: var(--ouro);
+  color: #111;
+}
+
+/* ---------- Cabeçalho ---------- */
 .header-loja {
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: rgba(0, 0, 0, 0.95);
-  border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+  background: linear-gradient(180deg, rgba(8, 8, 10, 0.94), rgba(8, 8, 10, 0.8));
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--linha);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
 }
 
 .nav-loja-topo {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 24px;
+  padding: 22px 24px;
   display: flex;
   justify-content: center;
-  gap: 30px;
+  gap: clamp(20px, 5vw, 56px);
+  transition: padding 0.4s var(--ease);
+}
+
+.header-loja.rolou .nav-loja-topo {
+  padding-top: 14px;
+  padding-bottom: 14px;
 }
 
 .nav-loja-topo a {
+  position: relative;
   text-decoration: none;
-  color: #d4af37;
-  font-size: 1.05rem;
-  font-weight: bold;
-  transition: 0.3s;
+  color: #f4efe4;
+  font-family: var(--sans);
+  font-size: 0.98rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  padding: 6px 2px;
+  transition: color 0.3s ease;
+}
+
+.nav-loja-topo a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--ouro), transparent);
+  transform: scaleX(0);
+  transition: transform 0.4s var(--ease);
 }
 
 .nav-loja-topo a:hover {
-  color: #f7df8a;
-  transform: translateY(-2px);
+  color: var(--ouro-claro);
 }
 
+.nav-loja-topo a:hover::after {
+  transform: scaleX(1);
+}
+
+/* ---------- Conteúdo ---------- */
 .loja {
   width: 100%;
-  padding: 40px 20px 80px;
+  padding: 40px 20px 90px;
 }
 
 .hero-loja {
   text-align: center;
   max-width: 900px;
-  margin: 60px auto 80px;
+  margin: 70px auto 90px;
 }
 
 .hero-loja h1 {
-  font-size: clamp(2.5rem, 6vw, 5rem);
-  color: #d4af37;
-  margin-bottom: 20px;
-  text-shadow: 0 3px 10px rgba(0, 0, 0, 0.8);
+  font-size: clamp(2.3rem, 6vw, 4.8rem);
+  line-height: 1.1;
+  margin-bottom: 22px;
+  background: linear-gradient(100deg, #a8841f 0%, #f7df8a 28%, #d4af37 50%, #fff1b8 66%, #a8841f 100%);
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: brilhoTexto 7s linear infinite;
+}
+
+.hero-loja h1::after {
+  content: "";
+  display: block;
+  width: 200px;
+  height: 14px;
+  margin: 22px auto 0;
+  background:
+    linear-gradient(90deg, transparent, var(--ouro)) left center / 80px 1px no-repeat,
+    linear-gradient(270deg, transparent, var(--ouro)) right center / 80px 1px no-repeat,
+    radial-gradient(circle, var(--ouro) 0 3px, transparent 4px) center / 14px 14px no-repeat;
 }
 
 .hero-loja p {
-  font-size: clamp(1rem, 2vw, 1.4rem);
+  font-size: clamp(1.05rem, 2vw, 1.4rem);
   line-height: 1.8;
-  color: #eee;
+  color: var(--texto-suave);
+  font-style: italic;
 }
 
 .produtos {
   max-width: 1200px;
   margin: 0 auto;
   display: grid;
-  gap: 40px;
+  gap: 44px;
 }
 
 .produto-card {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 35px;
+  gap: clamp(26px, 4vw, 48px);
   align-items: center;
-  background: rgba(0, 0, 0, 0.7);
-  border: 1px solid #d4af37;
-  border-radius: 18px;
-  padding: 30px;
-  box-shadow: 0 0 25px rgba(212, 175, 55, 0.15);
+  background: linear-gradient(160deg, rgba(30, 26, 15, 0.72), rgba(8, 8, 10, 0.85));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--linha);
+  border-radius: 24px;
+  padding: clamp(18px, 3vw, 34px);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55);
+  transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.5s var(--ease);
+}
+
+.produto-card:hover {
+  border-color: rgba(212, 175, 55, 0.7);
+  box-shadow: 0 34px 90px rgba(0, 0, 0, 0.6), 0 0 50px rgba(212, 175, 55, 0.18);
 }
 
 .produto-imagem,
 .carousel {
   width: 100%;
-  border-radius: 14px;
+  border-radius: 16px;
   overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(212, 175, 55, 0.3);
 }
 
 .produto-imagem {
   height: 550px;
   object-fit: cover;
+  display: block;
+  transition: filter 0.5s ease;
+}
+
+.produto-card:hover .produto-imagem {
+  filter: brightness(1.06) saturate(1.05);
 }
 
 .produto-info h2 {
-  font-size: 2.2rem;
-  color: #d4af37;
-  margin-bottom: 10px;
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  color: var(--ouro);
+  margin-bottom: 14px;
 }
 
 .preco {
   display: inline-block;
-  font-size: 1.8rem;
-  font-weight: bold;
-  color: #f7df8a;
-  margin-bottom: 20px;
+  font-family: var(--sans);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--ouro-claro);
+  background: rgba(212, 175, 55, 0.1);
+  border: 1px solid var(--linha);
+  padding: 6px 20px;
+  border-radius: 999px;
+  margin-bottom: 24px;
 }
 
 .produto-info p {
-  font-size: 1.1rem;
+  font-size: 1.08rem;
   line-height: 1.9;
-  color: #eee;
-  margin-bottom: 30px;
+  color: var(--texto-suave);
+  margin-bottom: 32px;
 }
 
 .btn-comprar {
+  position: relative;
+  overflow: hidden;
   display: inline-block;
   text-decoration: none;
-  background: linear-gradient(180deg, #f0cf68, #d4af37);
-  color: #111;
-  padding: 15px 35px;
+  background: linear-gradient(180deg, #f3d672, var(--ouro));
+  color: #14110a;
+  font-family: var(--sans);
+  padding: 16px 40px;
   border-radius: 999px;
-  font-weight: bold;
-  font-size: 1.05rem;
-  transition: 0.3s;
-  box-shadow: 0 0 20px rgba(212, 175, 55, 0.25);
+  font-weight: 700;
+  font-size: 1.02rem;
+  letter-spacing: 0.03em;
+  transition: transform 0.4s var(--ease), box-shadow 0.4s ease;
+  box-shadow: 0 0 24px rgba(212, 175, 55, 0.3);
+}
+
+.btn-comprar::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -80%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.55), transparent);
+  transform: skewX(-20deg);
+  transition: left 0.8s var(--ease);
 }
 
 .btn-comprar:hover {
-  transform: translateY(-3px) scale(1.03);
+  transform: translateY(-4px) scale(1.04);
+  box-shadow: 0 10px 40px rgba(212, 175, 55, 0.55);
 }
 
+.btn-comprar:hover::before {
+  left: 130%;
+}
+
+/* ---------- Carrossel (mesmo mecanismo de antes) ---------- */
 .carousel {
   position: relative;
   height: 550px;
@@ -163,7 +288,7 @@ body {
   width: 200%;
   height: 100%;
   display: flex;
-  transition: transform 0.5s ease;
+  transition: transform 0.8s var(--ease);
 }
 
 .carousel-imagens img {
@@ -189,83 +314,121 @@ body {
   justify-content: space-between;
   transform: translateY(-50%);
   padding: 0 15px;
+  pointer-events: none;
 }
 
 .carousel-controles label {
-  width: 45px;
-  height: 45px;
-  background: rgba(0, 0, 0, 0.7);
-  color: #d4af37;
-  border: 1px solid #d4af37;
+  width: 48px;
+  height: 48px;
+  background: rgba(8, 8, 10, 0.72);
+  backdrop-filter: blur(6px);
+  color: var(--ouro);
+  border: 1px solid var(--ouro);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   cursor: pointer;
-  transition: 0.3s;
+  pointer-events: auto;
+  transition: 0.35s var(--ease);
 }
 
 .carousel-controles label:hover {
-  background: #d4af37;
+  background: var(--ouro);
   color: #111;
+  transform: scale(1.12);
+  box-shadow: 0 0 24px rgba(212, 175, 55, 0.6);
 }
 
+/* ---------- Rodapé ---------- */
 .footer-loja {
-  background: rgba(0, 0, 0, 0.95);
-  border-top: 1px solid rgba(212, 175, 55, 0.3);
+  position: relative;
+  background: radial-gradient(ellipse at top, #17140c, #050505 70%);
   text-align: center;
-  padding: 25px 20px;
+  padding: 34px 20px;
+}
+
+.footer-loja::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--ouro), var(--ouro-claro), var(--ouro), transparent);
+  background-size: 200% 100%;
+  animation: brilhoTexto 6s linear infinite;
 }
 
 .footer-loja p {
-  color: #aaa;
-  font-size: 0.95rem;
+  font-family: var(--sans);
+  color: #8a8472;
+  font-size: 0.92rem;
 }
 
+@keyframes brilhoTexto {
+  from { background-position: 0% 0; }
+  to { background-position: 220% 0; }
+}
+
+/* ---------- Responsivo ---------- */
 @media (max-width: 992px) {
+  body {
+    background-attachment: scroll;
+  }
+
   .produto-card {
     grid-template-columns: 1fr;
   }
 
   .produto-imagem,
   .carousel {
-    height: 450px;
+    height: 460px;
   }
 }
 
 @media (max-width: 768px) {
   .nav-loja-topo {
-    gap: 18px;
+    gap: 22px;
     flex-wrap: wrap;
+    padding: 16px;
   }
 
-  .produto-card {
-    padding: 20px;
+  .hero-loja {
+    margin: 40px auto 60px;
   }
 
   .produto-imagem,
   .carousel {
-    height: 380px;
-  }
-
-  .produto-info h2 {
-    font-size: 1.8rem;
-  }
-
-  .preco {
-    font-size: 1.5rem;
+    height: 390px;
   }
 }
 
 @media (max-width: 480px) {
   .produto-imagem,
   .carousel {
-    height: 300px;
+    height: 320px;
   }
 
   .btn-comprar {
     width: 100%;
     text-align: center;
+  }
+
+  .carousel-controles label {
+    width: 42px;
+    height: 42px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

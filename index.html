@@ -3,43 +3,66 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0b0b0d" />
+    <meta
+      name="description"
+      content="Aliança com Cristo — grupo de jovens dedicado ao estudo da Palavra de Deus e a encenações na catedral, em São Miguel Paulista."
+    />
     <title>Aliança com Cristo</title>
-    <link rel="shortcut icon" href="imagend/cruz.webp" type="image/x-icon">
+    <link rel="shortcut icon" href="imagend/cruz.webp" type="image/x-icon" />
     <link rel="stylesheet" href="style.css" />
   </head>
 
   <body>
+    <header id="topo">
+      <a href="#inicio" class="marca" aria-label="Aliança com Cristo">
+        <img src="imagend/cruz.webp" alt="" />
+        <span>Aliança com Cristo</span>
+      </a>
+
+      <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu">☰</button>
+
+      <nav class="nav-principal" id="nav-principal">
+        <a href="#inicio">Início</a>
+        <a href="#sobre">Sobre Nós</a>
+        <a href="#eventos">Eventos</a>
+        <a href="#coordenadores">Coordenadores</a>
+        <a href="#contato">Contato</a>
+        <a href="loja.html">Loja</a>
+        <a href="#" id="btn-publicar" class="nav-destaque">Publicar</a>
+      </nav>
+    </header>
+
     <main>
       <section id="inicio" class="home">
-        <header>
-          <button class="menu-toggle" id="menu-toggle">☰</button>
-
-          <nav class="nav-principal" id="nav-principal">
-            <a href="#inicio">Início</a>
-            <a href="#sobre">Sobre Nós</a>
-            <a href="#eventos">Eventos</a>
-            <a href="#coordenadores">Coordenadores</a>
-            <a href="#contato">Contato</a>
-            <a href="loja.html">Loja</a>
-            <a href="#" id="btn-publicar">Publicar</a>
-          </nav>
-        </header>
+        <div class="home-raios" aria-hidden="true"></div>
 
         <div class="home-conteudo">
-          <img src="imagend/cruz.webp" alt="Cruz dourada" />
+          <div class="cruz-wrap">
+            <span class="cruz-halo" aria-hidden="true"></span>
+            <img src="imagend/cruz.webp" alt="Cruz dourada" />
+          </div>
+          <span class="home-selo">Grupo de Jovens · São Miguel Paulista</span>
           <h1>Aliança com Cristo</h1>
           <p>
             Unidos na fé, estudando a Palavra de Deus<br />
             e servindo com amor.
           </p>
-          <a href="indexSaibaMais.html" class="btn-home">Saiba Mais</a>
+          <div class="home-botoes">
+            <a href="indexSaibaMais.html" class="btn-home">Saiba Mais</a>
+            <a href="#eventos" class="btn-home btn-secundario">Nossos Eventos</a>
+          </div>
         </div>
+
+        <a href="#sobre" class="rolar-indicador" aria-label="Rolar para baixo">
+          <span class="mouse"><i></i></span>
+        </a>
       </section>
 
       <section id="sobre" class="sobre">
-        <h1 class="titulo-sobre">Sobre Nós</h1>
+        <h1 class="titulo-sobre" data-reveal>Sobre Nós</h1>
 
-        <div class="sobre-box">
+        <div class="sobre-box" data-reveal>
           <img src="imagend/sobrenos.webp" alt="Grupo Aliança com Cristo" />
 
           <p>
@@ -55,11 +78,13 @@
       </section>
 
       <section id="eventos" class="eventos">
-        <h1 class="titulo-eventos">Eventos</h1>
+        <h1 class="titulo-eventos" data-reveal>Eventos</h1>
 
         <div class="eventos-box">
-          <div class="card-evento">
-            <img src="imagend/retiro.webp" alt="Retiro para crismandos" />
+          <div class="card-evento" data-tilt>
+            <div class="card-img">
+              <img src="imagend/retiro.webp" alt="Retiro para crismandos" />
+            </div>
             <h3>Retiro</h3>
 
             <p>
@@ -73,11 +98,13 @@
             <a href="indexRetiro.html">Visualizar</a>
           </div>
 
-          <div class="card-evento">
-            <img
-              src="imagend/sextaSanta.webp"
-              alt="Encenação de Sexta-Feira Santa"
-            />
+          <div class="card-evento" data-tilt>
+            <div class="card-img">
+              <img
+                src="imagend/sextaSanta.webp"
+                alt="Encenação de Sexta-Feira Santa"
+              />
+            </div>
             <h3>Sexta-Feira Santa</h3>
 
             <p>
@@ -92,8 +119,10 @@
             <a href="indexSextaSanta.html">Visualizar</a>
           </div>
 
-          <div class="card-evento">
-            <img src="imagend/eventos.webp" alt="Momentos do grupo" />
+          <div class="card-evento" data-tilt>
+            <div class="card-img">
+              <img src="imagend/eventos.webp" alt="Momentos do grupo" />
+            </div>
             <h3>Momentos</h3>
 
             <p>
@@ -111,10 +140,10 @@
       </section>
 
       <section id="coordenadores" class="coordenadores">
-        <h1 class="titulo-coordenadores">Coordenadores</h1>
+        <h1 class="titulo-coordenadores" data-reveal>Coordenadores</h1>
 
         <div class="coordenadores-container">
-          <div class="card-coordenador">
+          <div class="card-coordenador" data-tilt>
             <div class="img-box">
               <img src="imagend/lilian.webp" alt="Lilian Albuquerque" />
             </div>
@@ -125,7 +154,7 @@
             </p>
           </div>
 
-          <div class="card-coordenador">
+          <div class="card-coordenador" data-tilt>
             <div class="img-box">
               <img src="imagend/leo.webp" alt="Leonardo Sampaio" />
             </div>
@@ -136,7 +165,7 @@
             </p>
           </div>
 
-          <div class="card-coordenador">
+          <div class="card-coordenador" data-tilt>
             <div class="img-box">
               <img src="imagend/clara.webp" alt="Clara Gracio" />
             </div>
@@ -174,15 +203,14 @@
             <div class="footer-social">
               <a
                 href="https://instagram.com/aliancacomcristo.sm?igshid=ZDdkNTZiNTM="
-                ><img src="imagend/instagram.webp" alt=""
+                ><img src="imagend/instagram.webp" alt="Instagram"
               /></a>
               <a
                 href="https://chat.whatsapp.com/KyG9YDcRZbP0mgERvpDntg?mode=gi_t"
               >
-                <img src="imagend/whatsapp.webp" alt=""
+                <img src="imagend/whatsapp.webp" alt="WhatsApp"
               /></a>
             </div>
-            <br /><br />
 
             <h2 class="endereco">Endereço</h2>
             <p class="endereco1">
@@ -200,42 +228,72 @@
     </footer>
 
     <div class="login-overlay" id="login-overlay">
-  <div class="login-modal">
+      <div class="login-modal" id="login-modal">
+        <span class="login-brilho" aria-hidden="true"></span>
 
-    <img src="imagend/cruz.webp" alt="Logo" class="login-logo">
+        <div class="login-conteudo">
+          <div class="login-cruz">
+            <span class="login-halo" aria-hidden="true"></span>
+            <img src="imagend/cruz.webp" alt="Logo" class="login-logo" />
+          </div>
 
-    <h2>Área dos Coordenadores</h2>
+          <h2>Área dos Coordenadores</h2>
+          <p class="login-sub">Acesso restrito à coordenação do grupo</p>
 
-    <input
-      type="text"
-      id="usuario"
-      placeholder="Usuário"
-      autocomplete="username"
-      maxlength="80"
-    >
+          <div class="campo">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 12a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9Zm0 2.2c-4 0-7.5 2-7.5 4.8V21h15v-2c0-2.8-3.5-4.8-7.5-4.8Z" />
+            </svg>
+            <input
+              type="text"
+              id="usuario"
+              placeholder="Usuário"
+              autocomplete="username"
+              maxlength="80"
+            />
+          </div>
 
-    <input
-      type="password"
-      id="senha"
-      placeholder="Senha"
-      autocomplete="current-password"
-      maxlength="200"
-    >
+          <div class="campo">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M17 9V7a5 5 0 0 0-10 0v2H5.5v12h13V9H17ZM9 7a3 3 0 0 1 6 0v2H9V7Zm3 10.5a1.6 1.6 0 1 1 0-3.2 1.6 1.6 0 0 1 0 3.2Z" />
+            </svg>
+            <input
+              type="password"
+              id="senha"
+              placeholder="Senha"
+              autocomplete="current-password"
+              maxlength="200"
+            />
+            <button type="button" class="ver-senha" id="ver-senha" aria-label="Mostrar senha">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 5C6.5 5 2.4 8.6 1 12c1.4 3.4 5.5 7 11 7s9.6-3.6 11-7c-1.4-3.4-5.5-7-11-7Zm0 11.5A4.5 4.5 0 1 1 12 7.5a4.5 4.5 0 0 1 0 9Zm0-7a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Z" />
+              </svg>
+            </button>
+          </div>
 
-    <div class="login-botoes">
-      <button id="entrar-login">
-        Entrar
-      </button>
+          <div class="login-botoes">
+            <button id="entrar-login">
+              <span class="btn-texto">Entrar</span>
+              <span class="btn-spinner" aria-hidden="true"></span>
+            </button>
 
-      <button id="cancelar-login">
-        Cancelar
-      </button>
+            <button id="cancelar-login">Cancelar</button>
+          </div>
+        </div>
+
+        <div class="login-sucesso" aria-hidden="true">
+          <svg viewBox="0 0 80 80" class="check-svg">
+            <circle cx="40" cy="40" r="34" />
+            <path d="M24 41l11 11 21-23" />
+          </svg>
+          <h3>Acesso liberado</h3>
+          <p>Abrindo o painel…</p>
+        </div>
+      </div>
     </div>
 
-  </div>
-</div>
-
     <script src="protecao.js"></script>
+    <script src="efeitos.js"></script>
     <script src="script.js"></script>
   </body>
 </html>
